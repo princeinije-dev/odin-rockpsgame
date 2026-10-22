@@ -5,19 +5,25 @@ function getComputerChoice() {
 }
 console.log(getComputerChoice());
 
-function getHumanChoice() {
-    let choice = prompt("Enter your choice (rock, paper, or scissors):");
-    while (!['rock', 'paper', 'scissors'].includes(choice)) {
-        choice = prompt("Invalid choice. Please enter rock, paper, or scissors:").toLowerCase();
-    }
-    return choice;
-}
-console.log(getHumanChoice());
+
+    const rockButton = document.querySelector("#rock");
+    rockButton.addEventListener('click', () => {
+        playGame('rock');
+    });
+    const paperButton = document.querySelector('#paper');
+    paperButton.addEventListener('click', () => {
+        playGame('paper');
+    });
+    const scissorsButton = document.querySelector('#scissors');
+    scissorsButton.addEventListener('click', () => {
+        playGame('scissors');
+    });
+
 
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice){
     if (humanChoice === computerChoice) {
         return "It's a tie!";
     }
@@ -33,4 +39,9 @@ function playRound(humanChoice, computerChoice) {
         return "Computer wins this round!";
     }
 }
-console.log(playRound(getHumanChoice(), getComputerChoice()));
+
+function playGame(humanChoice) {
+    const computerChoice = getComputerChoice();
+    const result = playRound(humanChoice, computerChoice);
+    console.log(result);
+}
